@@ -1,0 +1,32 @@
+# https://taskfile.dev
+
+version: '2'
+
+tasks:
+  compile:
+    cmds:
+      - goreleaser --snapshot --skip-publish --rm-dist
+
+  build:
+    desc: Build code
+    cmds:
+      - task: compile
+      - cp ./dist/envsub_darwin_amd64/envsub ./
+
+  install:
+    desc: Install code
+    cmds:
+      - task: compile
+      - cp ./dist/envsub_darwin_amd64/envsub $GOPATH/bin/envsub
+
+  dry-release:
+    desc: "Build packages"
+    cmds:
+      - task: compile
+    silent: true
+
+  release:
+    desc: "Build packages and release"
+    cmds:
+      - goreleaser --rm-dist
+    silent: true

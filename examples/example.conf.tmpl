@@ -1,0 +1,17 @@
+1. Simple example:
+  {{ .example1 }}
+
+2. If statement example:
+{{- if eq .example2 "test-user" }}
+  You are an TEST-USER!
+{{- else }}
+  Access denied!
+{{- end }}
+
+3. Range example:
+{{- range $k, $v := .example3 }}
+  {{ $k }} element is {{ $v -}}
+{{ end }}
+
+4. Env example:
+  {{ .USER }}
