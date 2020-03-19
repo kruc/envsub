@@ -33,7 +33,7 @@ changelog:
     - '^docs:'
     - '^test:'
 release:
-  draft: true
+  draft: false
 
 brews:
 - name: envsub
@@ -59,4 +59,4 @@ brews:
 
   description: "Parses templates using go templates"
 
-  skip_upload: true
+  skip_upload: false
