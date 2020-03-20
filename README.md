@@ -70,7 +70,7 @@ Linux
 
     envsub file.tmpl -f config.yaml
 
-  We will get `file` conatins
+  We will get `file` contains
 
     1. Simple example:
     value1
