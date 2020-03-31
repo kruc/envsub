@@ -14,6 +14,12 @@ If template file name contains .tmpl suffix it will be removed after parsing tem
 example1.conf.tmpl => example1.conf
 ```
 
+
+---
+You can also provide `--output`, `-o` flag to set output filename
+##### CAVEAT: works only when parsing single file!
+
+---
 ### Installation
 
 MacOS Homebrew:

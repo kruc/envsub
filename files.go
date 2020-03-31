@@ -25,7 +25,7 @@ func prepareFilepaths(args []string) []string {
 	return allPaths
 }
 
-func parseFile(path string, values values) {
+func parseFile(path string, values values, output string) {
 	fmt.Printf("Start parsing %v...", path)
 	if fileExists(path) {
 
@@ -35,7 +35,11 @@ func parseFile(path string, values values) {
 			panic(err)
 		}
 
-		file, err := os.Create(strings.Replace(path, ".tmpl", "", -1))
+		if output == "" {
+			output = strings.Replace(path, ".tmpl", "", -1)
+		}
+
+		file, err := os.Create(output)
 		defer file.Close()
 		if err != nil {
 			panic(err)

@@ -13,6 +13,7 @@ var (
 	envsFlag       bool
 	valuesEnvName  string
 	valuesFileName string
+	outputFileName string
 	envValues      map[string]interface{}
 	fileValues     map[string]interface{}
 )
@@ -22,6 +23,7 @@ func init() {
 	flag.BoolVar(&envsFlag, "envs", true, "Use environment variables as template values")
 	flag.StringVarP(&valuesEnvName, "json-env", "e", "", "Env variable name containing json values")
 	flag.StringVarP(&valuesFileName, "file-values", "f", "", "Path to the file containing values (yaml)")
+	flag.StringVarP(&outputFileName, "output", "o", "", "Output file name (!!ONLY WHEN PARSING SINGLE FILE!!)")
 }
 
 func main() {
@@ -53,7 +55,13 @@ func main() {
 		values = mergeValues(values, fileValues)
 	}
 
+	output := ""
+
+	if len(filepaths) == 1 && outputFileName != "" {
+		output = outputFileName
+	}
+
 	for _, path := range filepaths {
-		parseFile(path, values)
+		parseFile(path, values, output)
 	}
 }
