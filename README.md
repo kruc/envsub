@@ -29,56 +29,62 @@ brew install kruc/homebrew-tap/envsub
 
 Linux
 ```
- wget -qO- https://github.com/kruc/envsub/releases/download/v0.0.1/envsub_0.0.1_Linux_x86_64.tar.gz | tar -xvz -C /usr/local/bin && chmod +x /usr/local/bin/envsub
+ wget -qO- https://github.com/kruc/envsub/releases/latest/download/envsub_linux.tar.gz | tar -xvz -C /usr/local/bin && chmod +x /usr/local/bin/envsub
 ```
 
 ### Usage:
 
 1. Use env variables for templates
 
-  In template file use following placeholder `{{ .ENV_VARIABLE_NAME }}`
-  to replace it with corresponding env variable
+      In template file use following placeholder `{{ .ENV_VARIABLE_NAME }}`
+      to replace it with corresponding env variable
 
-    envsub file.tmpl --envs
+        envsub file.tmpl --envs
 
 2. Use extra values
 
-  Prepare json values:
+      Prepare json values:
 
-    {"rootValue":{"firstLevel":{"secondLevel":{"key1":"value1","key2":["listel1","listel2"]}}}}
+        {"rootValue":{"firstLevel":{"secondLevel":{"key1":"value1","key2":["listel1","listel2"]}}}}
 
-  Export it as env variable:
+      Export it as env variable:
 
-    export JSON_ENV_VARIABLE_NAME={"rootValue":{"firstLevel":{"secondLevel":{"key1":"value1","key2":["listel1","listel2"]}}}}
+        export JSON_ENV_VARIABLE_NAME={"rootValue":{"firstLevel":{"secondLevel":{"key1":"value1","key2":["listel1","listel2"]}}}}
 
-  In template file use following placeholder {{.rootValue.firstLevel.secondLevel.key1}}
-  to replace it with corresponding json key (value1 in this case)
+      In template file use following placeholder {{.rootValue.firstLevel.secondLevel.key1}}
+      to replace it with corresponding json key (value1 in this case)
 
-    envsub file.tmpl -e JSON_ENV_VARIABLE_NAME
+        envsub file.tmpl -e JSON_ENV_VARIABLE_NAME
 
 3. Use yaml configuration file
 
-  config.yaml:
-  ```yaml
-    example1: value1
-    example2: test-user
-    example3:
-      - val1
-      - val2
-  ```
+    config.yaml:
+    ```yaml
+      example1: value1
+      example2: test-user
+      example3:
+        - val1
+        - val2
+    ```
 
-  file.tmpl
+    file.tmpl
 
-     1. Simple example:
-     {{ .example1 }}
+         1. Simple example:
+         {{ .example1 }}
 
-  After execute:
+    After execute:
 
-    envsub file.tmpl -f config.yaml
+        envsub file.tmpl -f config.yaml
 
-  We will get `file` contains
+    We will get `file` contains
 
-    1. Simple example:
-    value1
+        1. Simple example:
+        value1
+
+4. Use glob patterns to specify template filenames
+
+      envsub file.json tpl/one.yaml wild/*.tmpl
+
+
 
 #### Check `examples` directory for more use cases
