@@ -3,11 +3,11 @@ before:
     - go mod tidy
     - go generate ./...
 builds:
-# - ldflags:
-#   - -X 'main.BuildVersion={{.Tag}}'
-#   - -X 'main.GitCommit={{.ShortCommit}}'
-#   - -X 'main.BuildDate={{time "01.02.2006 15:04:05"}}'
-- env:
+- ldflags:
+  - -X 'main.BuildVersion={{.Tag}}'
+  - -X 'main.GitCommit={{.ShortCommit}}'
+  - -X 'main.BuildDate={{time "01.02.2006 15:04:05"}}'
+  env:
   - CGO_ENABLED=0
   goos:
     - darwin
@@ -35,7 +35,7 @@ changelog:
     - '^docs:'
     - '^test:'
 release:
-  draft: false
+  draft: true
 
 brews:
 - name: envsub

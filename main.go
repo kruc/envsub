@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	flag "github.com/spf13/pflag"
@@ -16,6 +17,11 @@ var (
 	outputFileName string
 	envValues      map[string]interface{}
 	fileValues     map[string]interface{}
+	// For version info
+	version      bool
+	BuildVersion string
+	BuildDate    string
+	GitCommit    string
 )
 
 func init() {
@@ -24,11 +30,16 @@ func init() {
 	flag.StringVarP(&valuesEnvName, "json-env", "e", "", "Env variable name containing json values")
 	flag.StringVarP(&valuesFileName, "file-values", "f", "", "Path to the file containing values (yaml)")
 	flag.StringVarP(&outputFileName, "output", "o", "", "Output file name (!!ONLY WHEN PARSING SINGLE FILE!!)")
+	flag.BoolVarP(&version, "version", "v", false, "Display version")
 }
 
 func main() {
-
 	flag.Parse()
+
+	if version {
+		displayVersion()
+		return
+	}
 
 	if helpFlag || flag.NArg() == 0 {
 		usage()
@@ -64,4 +75,8 @@ func main() {
 	for _, path := range filepaths {
 		parseFile(path, values, output)
 	}
+}
+
+func displayVersion() {
+	fmt.Printf("BuildVersion: %s\tBuildDate: %s\tGitCommit: %s\n", BuildVersion, BuildDate, GitCommit)
 }

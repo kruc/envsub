@@ -2,6 +2,10 @@
 
 version: '2'
 
+vars:
+  VERSION_TAG:
+    sh: git describe --abbrev=0 --tags
+
 tasks:
   compile:
     cmds:
@@ -28,5 +32,12 @@ tasks:
   release:
     desc: "Build packages and release"
     cmds:
-      - goreleaser --rm-dist
+      - goreleaser --rm-dist # --release-notes=releaseNotes/{{.VERSION_TAG}}.md
     silent: true
+
+  release-notes:
+    desc: "Generate release notes template"
+    cmds:
+      - VERSION_TAG={{.VERSION_TAG}} envsub releaseNotes/template.md --envs -o releaseNotes/{{.VERSION_TAG}}.md
+    status:
+      - test -f releaseNotes/{{.VERSION_TAG}}.md

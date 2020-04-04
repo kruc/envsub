@@ -83,8 +83,9 @@ Linux
 
 4. Use glob patterns to specify template filenames
 
-      envsub file.json tpl/one.yaml wild/*.tmpl
-
+      ```
+      envsub file.json tpl/one.yaml wild/*.tmpl --envs
+      ```
 
 
 #### Check `examples` directory for more use cases

@@ -15,7 +15,7 @@ func usage() {
 
     1. Use env variables for templates
 
-      In template file use following placeholder {{ .ENV_VARIABLE_NAME }}
+      In template file use following placeholder 
       to replace it with corresponding env variable
 
       EXAMPLE:
@@ -31,7 +31,7 @@ func usage() {
 
         export JSON_ENV_VARIABLE_NAME={"rootValue":{"firstLevel":{"secondLevel":{"key1":"value1","key2":["listel1","listel2"]}}}}
 
-      In template file use following placeholder {{ .rootValue.firstLevel.secondLevel.key1 }}
+      In template file use following placeholder 
       to replace it with corresponding json key (value1 in this case)
 
       EXAMPLE:
